@@ -237,7 +237,7 @@ ImplicitSubgrid::FunctionalResidual(double t_old,
     } else {
       // age the old snow
       double age_settled = snow_age_old[0][c] + dt_days;
-      double dens_settled = params.density_freshsnow * std::max(std::pow(age_settled, 0.3), 1.);
+      double dens_settled = params.density_freshsnow * std::max(std::pow(age_settled, 0.26), 1.);
 
       // Match frost age with assigned density -- Calculate which day frost
       // density matched snow defermation function from (Martinec, 1977)
