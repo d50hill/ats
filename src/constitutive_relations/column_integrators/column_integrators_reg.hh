@@ -12,6 +12,8 @@
 #include "thaw_depth_evaluator.hh"
 #include "water_table_depth_evaluator.hh"
 #include "perched_water_table_depth_evaluator.hh"
+#include "liquid_saturation_water_table_evaluator.hh"
+#include "supra_permafrost_water_table_evaluator.hh"
 
 
 namespace Amanzi {
@@ -32,6 +34,12 @@ Utils::RegisteredFactory<Evaluator, WaterTableDepthEvaluator>
 template <>
 Utils::RegisteredFactory<Evaluator, PerchedWaterTableDepthEvaluator>
   PerchedWaterTableDepthEvaluator::reg_("perched water table depth");
+template <>
+Utils::RegisteredFactory<Evaluator, LiquidSaturationWaterTableDepthEvaluator>
+  LiquidSaturationWaterTableDepthEvaluator::reg_("liquid saturation water table depth");
+template <>
+Utils::RegisteredFactory<Evaluator, SupraPermafrostWaterTableDepthEvaluator>
+  SupraPermafrostWaterTableDepthEvaluator::reg_("supra-permafrost water table depth");
 
 } // namespace Relations
 } // namespace Amanzi
