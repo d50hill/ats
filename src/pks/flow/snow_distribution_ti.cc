@@ -285,6 +285,12 @@ SnowDistribution::AdvanceStep(double t_old, double t_new, bool reinit)
   double Ps_mean = (Ps_new + Ps_old) / 2.;
   S_->GetW<CompositeVector>(key_, tag_current_, name_).PutScalar(Ps_mean);
   S_->GetW<CompositeVector>(key_, tag_next_, name_).PutScalar(Ps_mean);
+  // The PutScalar above bypasses the evaluator, so mark the primary variable
+  // changed: otherwise conductivity and skin potential keep the previous
+  // window's cached values, and after a zero-snowfall window that is K = 0,
+  // the first residual is exactly zero, and the solve "converges" in 0
+  // iterations without redistributing anything.
+  ChangedSolution(tag_next_);
 
   double my_dt = -1;
   double my_t_old = t_old;
